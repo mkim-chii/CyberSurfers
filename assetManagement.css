@@ -1,0 +1,129 @@
+* {
+  box-sizing: border-box;
+  font-family: 'Josefin Sans', sans-serif;
+}
+
+body {
+  height: 100%;
+  background: url("creatica22background.png");
+  background-size: cover;
+}
+
+h1 {
+  margin: auto;
+  color: white;
+  text-align: center;
+  font-size: 4vw;
+}
+
+.instructions-container {
+  background: orange;
+  opacity: 0.9;
+  margin: 30px 10%;
+  padding: 20px;
+  text-align: center;
+}
+
+.instructions {
+  color: white;
+}
+
+main {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  margin: auto;
+/*   border: 1px solid blue; */
+}
+
+.bookshelf {
+/*   border: 2px solid green; */
+  width: 70%;
+  min-width: 300px;
+  display: block;
+  margin: auto;
+}
+
+.shelf {
+  background: url('assets/shelf.png');
+  background-repeat: no-repeat;
+  background-size: 100% 100px;
+  min-height: 120px;
+/*   border: 2px solid yellow; */
+  padding: 60px;
+}
+
+.shelf-items {
+  height: 100px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: baseline;
+  position: relative;                 
+  bottom: 0; 
+  margin: -100px 0;
+/*   border: 2px solid pink; */
+}
+
+img {
+/*   border: 1px solid green; */
+  margin: auto;
+  max-height: 100px;
+}
+
+@media only screen and (max-width: 700px) {
+  .bookshelf {
+    width: 100%;
+  }
+  
+  img {
+    height: 10vh;
+    min-height: 30px;
+/*     margin-top: 40px; */
+  }
+}
+
+img:hover {
+  cursor: pointer;
+  filter: brightness(150%)
+}
+
+img:selection {
+  filter: brightness(150%)
+}
+
+.note {
+/*   border: 1px solid white; */
+  padding: 20px;
+  width: 20%;
+  min-width: 300px;
+}
+.note-paper {
+  background: white;
+  padding: 20px;
+  text-align: center;
+}
+
+.li {
+  color: black;
+  font-wight: bold;
+}
+
+.btn-container {
+  display: flex;
+  justify-content: center;
+}
+
+.btn {
+  background-color: #6C5CFC;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+/*   margin: 4px 2px; */
+  cursor: pointer;
+  border-radius: 16px;
+  font-size: 25px;
+  box-shadow: 2px 2px 2px darkblue;
+}

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Decode Game</title>
+  <link href="code.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+  <h1>Lost on the Way!</h1>
+
+  <p> Your ship has gotten lost en route! Luckily, you found a cryptic set of directions. Decode the message to stay on the course! </p>
+  <p> Hint: Try not to get perpl-hex-ed... <br></p>
+  <h1>74 68 65 73 65 63 72 65 74 77 6F 72 64 69 73 70 69 6E 65 61 70 70 6C 65 73</h1>
+
+  <label for="code"><p>Solve the code!:</p></label>
+<input id="guess" type="text" id="code" name="code">
+  <input onclick="getVal()" type="submit" value="submit">
+
+<!--   here, we'll display whether the user was correct or wrong -->
+<div id="result">
+  
+</div>
+  
+
+
+ <script>
+    // this is the answer
+    let ans = "thesecretwordispineapples";
+
+    // when submit button is clicked, this function is invoked
+    function getVal() {
+      // get value from input field
+      let value = document.querySelector("#guess").value;
+      
+      // get access to result div to print result
+      let result = document.querySelector("#result");
+      console.log(value);
+
+      // if value is equal to the answer then print "correct" else print "incorrect"
+      if (value === ans) {
+        console.log("correct");
+        result.innerHTML = `<p>CORRECT!</p>`;
+      } else {
+        console.log("incorrect");
+        result.innerHTML = `<p>INCORRECT!</p>`;
+      }
+      
+    }
+  
+   
+ </script>
+  <a href="urlManipulation.html"<button class="blbutton center"> Continue </button></a>
+  
+</body>
+
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300&display=swap" rel="stylesheet">
+  
+</html>

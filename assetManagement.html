@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Asset Management</title>
+  <link href="assetManagement.css" rel="stylesheet" type="text/css" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@100&display=swap');
+  </style>
+</head>
+
+<body>
+  <h1>Asset Management</h1>
+  <div class="instructions-container">
+    <h2 class="instructions">First: Gather tools and prepare the jet to set out (Asset Management) - Know what devices
+      are part of your network infrastructure and manage risk</h2>
+  </div>
+  </br></br>
+  <main>
+    <div class="bookshelf">
+      <div class="shelf">
+        <div class="shelf-items">
+          <img id="ipad" onclick="getItem(this.id)" src="assets/ipad.png">
+          <img id="mic" onclick="getItem(this.id)" src="assets/mic.png">
+          <img id="flashdrive" onclick="getItem(this.id)" src="assets/flashdrive.png"
+            style="height: 30px; margin-top: 65px;">
+          <img id="desktop" onclick="getItem(this.id)" src="assets/desktop.png">
+        </div>
+      </div>
+
+      <div class="shelf">
+        <div class="shelf-items">
+          <img id="ipad2" onclick="getItem(this.id)" src="assets/ipad2.png">
+          <img id="smartwatch" onclick="getItem(this.id)" src="assets/smartwatch.png"
+            style="height: 70px; margin-top: 25px;">
+          <img id="harddrive" onclick="getItem(this.id)" src="assets/harddrive.png" style="margin-top: 50px;">
+          <img id="printer" onclick="getItem(this.id)" src="assets/printer.png">
+        </div>
+      </div>
+
+      <div class="shelf">
+        <div class="shelf-items">
+          <img id="nintendoswitch" onclick="getItem(this.id)" src="assets/nintendoswitch.png"
+            style="height: 70px; margin-top: 30px;">
+          <img id="mp3player" onclick="getItem(this.id)" src="assets/mp3player.png"
+            style="height: 60px; margin-top: 35px;">
+          <img id="camera" onclick="getItem(this.id)" src="assets/camera.png" style="height: 50px; margin-top: 40px;">
+          <img id="speaker" onclick="getItem(this.id)" src="assets/speaker.png">
+        </div>
+      </div>
+    </div>
+
+    <div class="note">
+      <div class="note-paper">
+        <h5>My Devices</h5>
+        <ul class="my-devices-list">
+          <!--           <li>iPad with Pen</li>
+          <li>Video Camera</li>
+          <li>Printer</li>
+          <li>Desktop</li>
+          <li>Flash Drive</li> -->
+        </ul>
+      </div>
+    </div>
+  </main>
+
+  <div class="btn-container">
+    <a href="attack1.html">
+      <div id="select-assets-btn" class="btn purple" href="#">Select Assets</div>
+    </a>
+
+  </div>
+
+  <script>
+    let allItems = ["ipad", "mic", "flashdrive", "desktop", "ipad2", "smartwatch", "harddrive", "printer", "nintendoswitch", "mp3player", "camera", "speaker"];
+    let allItemsNote = ["iPad", "Microphone", "Flash drive", "Desktop", "iPad with pen", "Smart watch", "Hard drive", "Printer", "Nintendo switch", "mp3 player", "Camera", "Speaker"];
+
+    // random num from 3 to 8
+    let numItemsToFind = Math.floor(Math.random() * 5) + 3;
+    let itemsToFind = [];
+
+    let myDevicesList = document.querySelector(".my-devices-list");
+
+    function drawList() {
+      let html = '';
+
+      for (item in itemsToFind) {
+        html += `<li>${allItemsNote[itemsToFind[item]]}</li>`;
+        console.log(allItemsNote[itemsToFind[item]]);
+      }
+
+      myDevicesList.innerHTML = html
+    }
+
+
+    (function chooseItemsToFind() {
+      for (let i = 0; i < numItemsToFind; i++) {
+        // get random word index
+        let index = Math.floor(Math.random() * 12);
+        // console.log(index);
+
+        // ensure number is unique so there are no duplicates
+        // TODO: still getting duplicates actually, double check
+        for (item in itemsToFind) {
+          // console.log(itemsToFind[item]);
+          while (index === itemsToFind[item]) {
+            index = Math.floor(Math.random() * 12);
+            // console.log(index);
+          }
+        }
+
+        itemsToFind.push(index);
+      }
+      drawList();
+    })();
+
+    console.log(itemsToFind);
+
+
+    let selectedItems = [];
+
+    function getItem(id) {
+      let item = findItem(id);
+      let itemImage = document.querySelector(`#${id}`);
+      // console.log(itemImage);
+
+      if (item !== -1) {
+        selectedItems = selectedItems.filter(function (element) {
+          itemImage.style.filter = "brightness(100%)";
+          return element !== selectedItems[item];
+        });
+
+        console.log(selectedItems);
+        return;
+      }
+
+      selectedItems.push(id);
+      itemImage.style.filter = "brightness(150%)";
+      console.log(selectedItems);
+    }
+
+
+    function findItem(key) {
+      let i = 0;
+
+      for (item in selectedItems) {
+        if (selectedItems[item] == key) {
+          console.log(selectedItems[item]);
+          return item;
+        }
+
+        i++;
+      }
+
+      return -1;
+    }
+
+
+    function saveAssets() {
+      let found = 0;
+      let count = 0;
+      let selectionEmpty = 0;
+
+      // for each item selected by user
+      for (item in selectedItems) {
+        // console.log(selectedItems[item]);
+        count++;
+        // for each item on list
+        for (i in itemsToFind) {
+          // console.log(allItems[itemsToFind[i]]);
+
+          if (allItems[itemsToFind[i]] === selectedItems[item]) {
+            // console.log("test");
+            selectionEmpty = 1;
+            found++;
+            break;
+          }
+        }
+      }
+
+      console.log(found, count);
+
+      // found correct items and only correct items
+      if (found === count && selectionEmpty == 1) {
+        console.log("yes");
+
+        // page redirect to first attack
+        window.location.href = "attack1.html";
+      } else { // user made mistake somewhere
+        console.log("no");
+      }
+
+    }
+
+    let saveAssetsBtn = document.querySelector("#select-assets-btn");
+    saveAssetsBtn.addEventListener("click", saveAssets);
+
+  </script>
+
+</body>
+
+</html>

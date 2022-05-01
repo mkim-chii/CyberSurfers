@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Attack 1</title>
+  <link href="attack1.css" rel="stylesheet" type="text/css" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@100&display=swap');
+  </style>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+
+<body>
+  <h1>Attack 1: Having a Secure Password</h1>
+
+  <main>
+    <div class="image">
+      <img src="assets/thinkingspaceexplorer.png">
+    </div>
+
+    <div class="password-container">
+      <form id="form">
+        <h3 style="text-align: center">Choose your password</h3>
+        <label for="pwd">Password:</label>
+        <input type="password" id="pwd" name="pwd" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}" title="Must contain at least one number, one uppercase letter, one lowercase letter, one special character, and at least 12 or more characters in total." required>
+        <input id="submit" onclick="nextAttack()" type="submit">
+      </form>
+    </div>
+    
+    <div class="attempts">
+      <p>Attempts Left:</p>
+      <div id="attempts-left"></div>
+    </div>
+
+    </br></br>
+    <div class="hints">
+      <p>Characteristics of a strong password:</p>
+      <ul class="hints-list">
+        <li>At least 12 characters; the more characters, the better</li>
+        <li>A mixture of uppercase and lowercase letters</li>
+        <li>A mixture of letters and numbers</li>
+        <li>Inclusion of at least one special character, e.g., ! @ # ? ]</li>
+      </ul>
+    </div>
+  </main>
+
+  <script>
+    let pw = document.querySelector("#pwd");
+    let padlockArea = document.querySelector("#attempts-left");
+    let attemptsLeft = 3;
+
+    drawPadlocks();
+    
+    $("#form").submit(function(e){
+        e.preventDefault();
+    });
+    
+    function nextAttack() {
+      let pattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$/;
+      
+      if (pw.value.match(pattern)) {
+        console.log("good");
+        window.location.href = "attack2.html";
+      } else {
+        console.log("bad");
+        attemptsLeft--;
+
+        if (attemptsLeft === 0) {
+          window.location.href = "gameover.html";
+        }
+        
+        drawPadlocks();
+      }
+      
+    }
+
+    function drawPadlocks() {
+      let html = '';
+      
+      for (let i = 0; i < attemptsLeft; i++) {
+        html += `<img class="padlock" src="assets/padlock.png">`
+      }
+
+      padlockArea.innerHTML = html;
+    }
+    
+  </script>
+
+</body>
+
+</html>
